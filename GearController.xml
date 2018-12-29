@@ -7,9 +7,10 @@ int FromGear, ToGear;
 int ErrStat;
 
 chan ReqNewGear, NewGear;
-chan ReqSet, ReqNeu, GaerSet, Geaerneu;
+chan ReqSet, ReqNeu, GearSet, GearNeu;
 chan OpenClutch, CloseClutch, ClutchIsOpen, ClutchIsClosed;
-chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;</declaration>
+chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
+</declaration>
 	<template>
 		<name x="5" y="5">interface</name>
 		<declaration>// Place local declarations here.</declaration>
@@ -219,20 +220,20 @@ ToGear = 1</label>
 	<template>
 		<name>gearControl</name>
 		<location id="id19" x="323" y="85">
-			<name x="195" y="76">c:ReqSetGear2</name>
+			<name x="195" y="76">CReqSetGear2</name>
 		</location>
 		<location id="id20" x="93" y="340">
 			<name x="102" y="348">CheckGearSet2</name>
 			<label kind="comments" x="102" y="365">(GCTimer &lt;= 350)</label>
 		</location>
 		<location id="id21" x="93" y="255">
-			<name x="110" y="246">c:ClutchIsOpen</name>
+			<name x="110" y="246">CClutchIsOpen</name>
 		</location>
 		<location id="id22" x="93" y="442">
-			<name x="102" y="450">c:ClutchClose</name>
+			<name x="102" y="450">CClutchClose</name>
 		</location>
 		<location id="id23" x="323" y="-263">
-			<name x="348" y="-272">c:ClutchOpen2</name>
+			<name x="348" y="-272">CClutchOpen2</name>
 		</location>
 		<location id="id24" x="323" y="-25">
 			<name x="348" y="-51">CheckGearNeu2</name>
@@ -267,38 +268,38 @@ ToGear = 1</label>
 			<label kind="comments" x="-68" y="-323">(GCTimer &lt;= 200)</label>
 		</location>
 		<location id="id33" x="-680" y="595">
-			<name x="-722" y="612">c:GearChanged</name>
+			<name x="-722" y="612">CGearChanged</name>
 		</location>
 		<location id="id34" x="-680" y="442">
-			<name x="-680" y="459">c:ReqTorqueC</name>
+			<name x="-680" y="459">CReqTorqueC</name>
 		</location>
 		<location id="id35" x="-680" y="331">
 			<name x="-671" y="306">CheckGearSet1</name>
 			<label kind="comments" x="-671" y="340">(GCTimer &lt;= 350)</label>
 		</location>
 		<location id="id36" x="-680" y="229">
-			<name x="-663" y="221">c:ReqSetGear</name>
+			<name x="-663" y="221">CReqSetGear</name>
 		</location>
 		<location id="id37" x="-680" y="127">
 			<name x="-663" y="102">CheckSyncSpeed</name>
 			<label kind="comments" x="-680" y="136">(GCTimer &lt;= 155)</label>
 		</location>
 		<location id="id38" x="-680" y="17">
-			<name x="-654" y="8">c:ReqSyncSpeed</name>
+			<name x="-654" y="8">CReqSyncSpeed</name>
 		</location>
 		<location id="id39" x="-680" y="-111">
 			<name x="-663" y="-127">checkGearNeu</name>
 			<label kind="comments" x="-680" y="-93">(GCTimer &lt;= 250)</label>
 		</location>
 		<location id="id40" x="-680" y="-221">
-			<name x="-654" y="-229">c:ReqNeuGear</name>
+			<name x="-654" y="-229">CReqNeuGear</name>
 		</location>
 		<location id="id41" x="-680" y="-340">
 			<name x="-671" y="-331">CheckTorque</name>
 			<label kind="comments" x="-680" y="-314">(GCTimer &lt;= 255)</label>
 		</location>
 		<location id="id42" x="-680" y="-450">
-			<name x="-654" y="-459">c:Initiate</name>
+			<name x="-654" y="-459">CInitiate</name>
 		</location>
 		<location id="id43" x="-680" y="-544">
 			<name x="-690" y="-578">Gear</name>
@@ -589,7 +590,7 @@ ToGear = 1</label>
 			<label kind="comments" x="-178" y="-76">(ETimer &lt;= 900)</label>
 		</location>
 		<location id="id55" x="59" y="-93">
-			<name x="8" y="-127">ClutchOpen</name>
+			<name x="8" y="-127">CClutchOpen</name>
 		</location>
 		<location id="id56" x="255" y="127">
 			<name x="238" y="144">Zero</name>
@@ -688,7 +689,7 @@ UseCase = 0</label>
 		</transition>
 	</template>
 	<template>
-		<name>gear-box</name>
+		<name>gearBox</name>
 		<declaration>int ErrStat;</declaration>
 		<location id="id59" x="42" y="-76">
 			<name x="17" y="-59">ErrorNeu</name>
@@ -750,8 +751,14 @@ UseCase = 0</label>
 	</template>
 	<system>// Place template instantiations here.
 //Process = Template();
+GC = gearControl();
+I = interface();
+C = clutch();
+E = engine();
+GB = gearBox();
 // List one or more processes to be composed into a system.
 //system Process;
+system GC, I, C, E, GB;
     </system>
 	<queries>
 	</queries>
