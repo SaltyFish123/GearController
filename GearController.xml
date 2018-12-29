@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+clock GCTimer, GBTimer, CTimer, ETimer;
+int FromGear, ToGear;
+
+chan ReqNewGear, NewGear;
+chan ReqSet, ReqNeu, GaerSet, Geaerneu;
+chan OpenClutch, CloseClutch, ClutchIsOpen, ClutchIsClosed;
+chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;</declaration>
+	<template>
+		<name x="5" y="5">interface</name>
+		<declaration>// Place local declarations here.</declaration>
+		<location id="id0" x="0" y="0">
+		</location>
+		<init ref="id0"/>
+	</template>
+	<template>
+		<name>gearControl</name>
+		<location id="id1" x="0" y="0">
+		</location>
+		<init ref="id1"/>
+	</template>
+	<template>
+		<name>clutch</name>
+		<declaration>int ErrStat;</declaration>
+		<location id="id2" x="0" y="0">
+		</location>
+		<init ref="id2"/>
+	</template>
+	<template>
+		<name>engine</name>
+		<declaration>int UseCase;</declaration>
+		<location id="id3" x="0" y="0">
+		</location>
+		<init ref="id3"/>
+	</template>
+	<template>
+		<name>gear-box</name>
+		<declaration>int ErrStat;</declaration>
+		<location id="id4" x="42" y="-76">
+			<name x="17" y="-59">ErrorNeu</name>
+		</location>
+		<location id="id5" x="153" y="-161">
+			<name x="136" y="-195">Opening</name>
+			<label kind="comments" x="102" y="-212">(GBTimer &lt;= 200)</label>
+		</location>
+		<location id="id6" x="153" y="17">
+			<name x="136" y="34">Idle</name>
+		</location>
+		<location id="id7" x="-76" y="-76">
+			<name x="-102" y="-110">ErrorIdle</name>
+		</location>
+		<location id="id8" x="-187" y="17">
+			<name x="-212" y="34">Closing</name>
+			<label kind="comments" x="-238" y="59">(GBTimer &lt;= 300)</label>
+		</location>
+		<location id="id9" x="-187" y="-161">
+			<name x="-212" y="-195">Neutral</name>
+		</location>
+		<init ref="id9"/>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id4"/>
+			<label kind="guard" x="0" y="-153">GBTimer &gt; 200</label>
+			<label kind="assignment" x="8" y="-136">ErrStat = 4</label>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id7"/>
+			<label kind="guard" x="-153" y="-17">GBTimer == 300</label>
+			<label kind="assignment" x="-127" y="-34">ErrStat = 3</label>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-110" y="25">GBTimer &gt;= 100</label>
+			<label kind="synchronisation" x="-85" y="42">GearSet!</label>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="153" y="-89">ReqNeu?</label>
+			<label kind="assignment" x="153" y="-72">GBTimer = 0</label>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id9"/>
+			<label kind="guard" x="-68" y="-204">GBTimer &gt;= 100</label>
+			<label kind="synchronisation" x="-51" y="-178">GearNeu!</label>
+		</transition>
+		<transition>
+			<source ref="id9"/>
+			<target ref="id8"/>
+			<label kind="synchronisation" x="-246" y="-127">ReqSet?</label>
+			<label kind="assignment" x="-280" y="-102">GBTimer = 0</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+Process = Template();
+// List one or more processes to be composed into a system.
+system Process;
+    </system>
+	<queries>
+	</queries>
+</nta>
