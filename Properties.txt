@@ -1,0 +1,28 @@
+﻿
+// (7) ~ (10)
+A[] GC.CCloseError imply C.ErrorClose
+A[] GC.COpenError imply C.ErrorOpen
+A[] GC.GSetError imply GB.ErrorIdel
+A[] GC.GNeuError imply GB.ErrorNeu
+
+// (11) ~ (12)
+A[] E.ErrorSpeed imply ErrStat!=0
+A[] E.Torque imply C.Closed
+
+// (13)
+E<> I.GearN
+E<> I.Gear1
+E<> I.Gear2
+E<> I.Gear3
+E<> I.Gear4
+E<> I.Gear5
+E<> I.GearR
+
+// (14)
+A[] (GC.Gear and I.Gear1) imply E.Torque
+A[] (GC.Gear and I.Gear2) imply E.Torque
+A[] (GC.Gear and I.Gear3) imply E.Torque
+A[] (GC.Gear and I.Gear4) imply E.Torque
+A[] (GC.Gear and I.Gear5) imply E.Torque
+A[] (GC.Gear and I.GearR) imply E.Torque
+
