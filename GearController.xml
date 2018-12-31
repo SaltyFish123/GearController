@@ -3,8 +3,9 @@
 <nta>
 	<declaration>// Place global declarations here.
 clock GCTimer, GBTimer, CTimer, ETimer, SysTimer;
-int FromGear, ToGear;
+int[0, 6] FromGear, ToGear;
 int ErrStat;
+int UseCase;
 
 chan ReqNewGear, NewGear;
 chan ReqSet, ReqNeu, GearSet, GearNeu;
@@ -224,6 +225,7 @@ ToGear = 1</label>
 		</location>
 		<location id="id20" x="93" y="340">
 			<name x="102" y="348">CheckGearSet2</name>
+			<label kind="invariant" x="83" y="357">GCTimer &lt;= 350</label>
 			<label kind="comments" x="102" y="365">(GCTimer &lt;= 350)</label>
 		</location>
 		<location id="id21" x="93" y="255">
@@ -237,6 +239,7 @@ ToGear = 1</label>
 		</location>
 		<location id="id24" x="323" y="-25">
 			<name x="348" y="-51">CheckGearNeu2</name>
+			<label kind="invariant" x="313" y="-8">GCTimer &lt;= 250</label>
 			<label kind="comments" x="340" y="-17">(GCTimer &lt;= 250)</label>
 		</location>
 		<location id="id25" x="25" y="-17">
@@ -244,6 +247,7 @@ ToGear = 1</label>
 		</location>
 		<location id="id26" x="-102" y="595">
 			<name x="-153" y="612">CheckClutchClosed2</name>
+			<label kind="invariant" x="-112" y="612">GCTimer &lt;= 200</label>
 			<label kind="comments" x="-144" y="637">(GCTimer &lt;= 200)</label>
 		</location>
 		<location id="id27" x="-306" y="518">
@@ -251,6 +255,7 @@ ToGear = 1</label>
 		</location>
 		<location id="id28" x="-450" y="442">
 			<name x="-493" y="391">CheckClutchClosed</name>
+			<label kind="invariant" x="-460" y="459">GCTimer &lt;= 200</label>
 			<label kind="comments" x="-493" y="408">(GCTimer &lt;= 200)</label>
 		</location>
 		<location id="id29" x="-289" y="331">
@@ -258,6 +263,7 @@ ToGear = 1</label>
 		</location>
 		<location id="id30" x="-76" y="136">
 			<name x="-102" y="144">CheckClutch</name>
+			<label kind="invariant" x="-86" y="153">GCTimer &lt;= 200</label>
 			<label kind="comments" x="-119" y="161">(GCTimer &lt;= 200)</label>
 		</location>
 		<location id="id31" x="-68" y="-127">
@@ -265,6 +271,7 @@ ToGear = 1</label>
 		</location>
 		<location id="id32" x="-68" y="-357">
 			<name x="-51" y="-348">CheckClutch2</name>
+			<label kind="invariant" x="-78" y="-340">GCTimer &lt;= 200</label>
 			<label kind="comments" x="-68" y="-323">(GCTimer &lt;= 200)</label>
 		</location>
 		<location id="id33" x="-680" y="595">
@@ -275,6 +282,7 @@ ToGear = 1</label>
 		</location>
 		<location id="id35" x="-680" y="331">
 			<name x="-671" y="306">CheckGearSet1</name>
+			<label kind="invariant" x="-690" y="348">GCTimer &lt;= 350</label>
 			<label kind="comments" x="-671" y="340">(GCTimer &lt;= 350)</label>
 		</location>
 		<location id="id36" x="-680" y="229">
@@ -282,6 +290,7 @@ ToGear = 1</label>
 		</location>
 		<location id="id37" x="-680" y="127">
 			<name x="-663" y="102">CheckSyncSpeed</name>
+			<label kind="invariant" x="-690" y="144">GCTimer &lt;= 155</label>
 			<label kind="comments" x="-680" y="136">(GCTimer &lt;= 155)</label>
 		</location>
 		<location id="id38" x="-680" y="17">
@@ -289,14 +298,16 @@ ToGear = 1</label>
 		</location>
 		<location id="id39" x="-680" y="-111">
 			<name x="-663" y="-127">checkGearNeu</name>
+			<label kind="invariant" x="-663" y="-110">GCTimer &lt;= 250</label>
 			<label kind="comments" x="-680" y="-93">(GCTimer &lt;= 250)</label>
 		</location>
 		<location id="id40" x="-680" y="-221">
 			<name x="-654" y="-229">CReqNeuGear</name>
 		</location>
-		<location id="id41" x="-680" y="-340">
-			<name x="-671" y="-331">CheckTorque</name>
-			<label kind="comments" x="-680" y="-314">(GCTimer &lt;= 255)</label>
+		<location id="id41" x="-680" y="-348">
+			<name x="-671" y="-339">CheckTorque</name>
+			<label kind="invariant" x="-690" y="-331">GCTimer &lt;= 255</label>
+			<label kind="comments" x="-680" y="-322">(GCTimer &lt;= 255)</label>
 		</location>
 		<location id="id42" x="-680" y="-450">
 			<name x="-654" y="-459">CInitiate</name>
@@ -509,7 +520,6 @@ ToGear = 1</label>
 	</template>
 	<template>
 		<name>clutch</name>
-		<declaration>int ErrStat;</declaration>
 		<location id="id44" x="221" y="68">
 			<name x="187" y="85">Closing</name>
 			<label kind="comments" x="153" y="110">(CTimer &lt;= 150)</label>
@@ -570,7 +580,6 @@ ToGear = 1</label>
 	</template>
 	<template>
 		<name>engine</name>
-		<declaration>int UseCase;</declaration>
 		<location id="id50" x="255" y="-187">
 			<name x="230" y="-246">DecTorque</name>
 			<label kind="comments" x="221" y="-221">(ETimer &lt;= 400)</label>
@@ -690,7 +699,6 @@ UseCase = 0</label>
 	</template>
 	<template>
 		<name>gearBox</name>
-		<declaration>int ErrStat;</declaration>
 		<location id="id59" x="42" y="-76">
 			<name x="17" y="-59">ErrorNeu</name>
 		</location>
@@ -761,5 +769,17 @@ GB = gearBox();
 system GC, I, C, E, GB;
     </system>
 	<queries>
+		<query>
+			<formula>A[] ErrStat == 0
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] not deadlock or ErrStat != 0
+			</formula>
+			<comment>
+			</comment>
+		</query>
 	</queries>
 </nta>
