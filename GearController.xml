@@ -522,6 +522,7 @@ ToGear = 1</label>
 		<name>clutch</name>
 		<location id="id44" x="221" y="68">
 			<name x="187" y="85">Closing</name>
+			<label kind="invariant" x="170" y="144">CTimer &lt;= 150</label>
 			<label kind="comments" x="153" y="110">(CTimer &lt;= 150)</label>
 		</location>
 		<location id="id45" x="221" y="-119">
@@ -535,6 +536,7 @@ ToGear = 1</label>
 		</location>
 		<location id="id48" x="-170" y="-119">
 			<name x="-195" y="-178">Opening</name>
+			<label kind="invariant" x="-221" y="-204">CTimer &lt;= 150</label>
 			<label kind="comments" x="-229" y="-153">(CTimer &lt;= 150)</label>
 		</location>
 		<location id="id49" x="-170" y="68">
@@ -704,6 +706,7 @@ UseCase = 0</label>
 		</location>
 		<location id="id60" x="153" y="-161">
 			<name x="136" y="-195">Opening</name>
+			<label kind="invariant" x="195" y="-178">GBTimer &lt;= 200</label>
 			<label kind="comments" x="102" y="-212">(GBTimer &lt;= 200)</label>
 		</location>
 		<location id="id61" x="153" y="17">
@@ -714,6 +717,7 @@ UseCase = 0</label>
 		</location>
 		<location id="id63" x="-187" y="17">
 			<name x="-212" y="34">Closing</name>
+			<label kind="invariant" x="-238" y="93">GBTimer &lt;= 300</label>
 			<label kind="comments" x="-238" y="59">(GBTimer &lt;= 300)</label>
 		</location>
 		<location id="id64" x="-187" y="-161">
