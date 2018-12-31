@@ -546,13 +546,13 @@ ToGear = 1</label>
 		<transition>
 			<source ref="id44"/>
 			<target ref="id46"/>
-			<label kind="guard" x="51" y="25">CTimer == 150</label>
+			<label kind="guard" x="51" y="25">CTimer &gt; 150</label>
 			<label kind="assignment" x="102" y="42">ErrStat = 1</label>
 		</transition>
 		<transition>
 			<source ref="id48"/>
 			<target ref="id47"/>
-			<label kind="guard" x="-136" y="-119">CTimer == 150</label>
+			<label kind="guard" x="-136" y="-119">CTimer &gt; 150</label>
 			<label kind="assignment" x="-110" y="-102">ErrStat = 2</label>
 		</transition>
 		<transition>
@@ -645,12 +645,12 @@ ToGear = 1</label>
 		<transition>
 			<source ref="id54"/>
 			<target ref="id53"/>
-			<label kind="guard" x="-161" y="0">ETimer == 900</label>
+			<label kind="guard" x="-161" y="0">ETimer &gt; 900</label>
 		</transition>
 		<transition>
 			<source ref="id52"/>
 			<target ref="id53"/>
-			<label kind="guard" x="-229" y="161">ETimer == 500</label>
+			<label kind="guard" x="-229" y="161">ETimer &gt; 500</label>
 		</transition>
 		<transition>
 			<source ref="id57"/>
@@ -686,7 +686,7 @@ UseCase = 0</label>
 		<transition>
 			<source ref="id50"/>
 			<target ref="id55"/>
-			<label kind="guard" x="110" y="-161">ETimer == 400</label>
+			<label kind="guard" x="110" y="-161">ETimer &gt; 400</label>
 			<label kind="assignment" x="119" y="-144">UseCase = 1</label>
 		</transition>
 		<transition>
@@ -737,7 +737,7 @@ UseCase = 0</label>
 		<transition>
 			<source ref="id63"/>
 			<target ref="id62"/>
-			<label kind="guard" x="-153" y="-17">GBTimer == 300</label>
+			<label kind="guard" x="-153" y="-17">GBTimer &gt; 300</label>
 			<label kind="assignment" x="-127" y="-34">ErrStat = 3</label>
 		</transition>
 		<transition>
