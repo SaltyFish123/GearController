@@ -584,6 +584,7 @@ ToGear = 1</label>
 		<name>engine</name>
 		<location id="id50" x="255" y="-187">
 			<name x="230" y="-246">DecTorque</name>
+			<label kind="invariant" x="272" y="-195">ETimer &lt;= 400</label>
 			<label kind="comments" x="221" y="-221">(ETimer &lt;= 400)</label>
 		</location>
 		<location id="id51" x="-229" y="-187">
@@ -591,6 +592,7 @@ ToGear = 1</label>
 		</location>
 		<location id="id52" x="-229" y="127">
 			<name x="-289" y="93">Speed</name>
+			<label kind="invariant" x="-357" y="144">ETimer &lt;= 500</label>
 			<label kind="comments" x="-365" y="119">(ETimer &lt;= 500)</label>
 		</location>
 		<location id="id53" x="-110" y="212">
@@ -598,6 +600,7 @@ ToGear = 1</label>
 		</location>
 		<location id="id54" x="-110" y="-93">
 			<name x="-127" y="-127">ClutchClose</name>
+			<label kind="invariant" x="-161" y="-59">ETimer &lt;= 900</label>
 			<label kind="comments" x="-178" y="-76">(ETimer &lt;= 900)</label>
 		</location>
 		<location id="id55" x="59" y="-93">
@@ -608,6 +611,7 @@ ToGear = 1</label>
 		</location>
 		<location id="id57" x="59" y="127">
 			<name x="26" y="144">FindSpeed</name>
+			<label kind="invariant" x="25" y="195">ETimer &lt;= 200</label>
 			<label kind="comments" x="17" y="170">(ETimer &lt;= 200)</label>
 		</location>
 		<location id="id58" x="178" y="-34">
