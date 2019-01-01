@@ -18,6 +18,24 @@ chan OpenClutch, CloseClutch, ClutchIsOpen, ClutchIsClosed;
 
 //engine gearControl
 chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
+
+//gearBox ErrorIdle
+bool GBErrIdle = false;
+clock GBErrIdleClock;
+
+//gearBox ErrorNeu
+bool GBErrNeu = false;
+clock GBErrNeuClock;
+
+//clutch ErrorOpen
+bool CErrOpen = false;
+clock CErrOpenClock;
+
+//clutch ErrorClose
+bool CErrClose = false;
+clock CErrCloseClock;
+
+
 </declaration>
 	<template>
 		<name x="5" y="5">interface</name>
@@ -100,21 +118,21 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 			<target ref="id8"/>
 			<label kind="synchronisation" x="154" y="467">ReqNewGear!</label>
 			<label kind="assignment" x="154" y="484">FromGear = 3,
-++ToGear = 2</label>
+ToGear = 2</label>
 		</transition>
 		<transition>
 			<source ref="id5"/>
 			<target ref="id1"/>
 			<label kind="synchronisation" x="128" y="777">ReqNewGear!</label>
 			<label kind="assignment" x="128" y="794">FromGear = 4,
-++ToGear = 3</label>
+ToGear = 3</label>
 		</transition>
 		<transition>
 			<source ref="id4"/>
 			<target ref="id3"/>
 			<label kind="synchronisation" x="128" y="1122">ReqNewGear!</label>
 			<label kind="assignment" x="128" y="1139">FromGear = 5,
-++ToGear = 4</label>
+ToGear = 4</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
@@ -136,21 +154,21 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 			<target ref="id2"/>
 			<label kind="synchronisation" x="273" y="952">ReqNewGear!</label>
 			<label kind="assignment" x="273" y="969">FromGear = 4,
-++ToGear = 5</label>
+ToGear = 5</label>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id0"/>
 			<label kind="synchronisation" x="281" y="620">ReqNewGear!</label>
 			<label kind="assignment" x="281" y="637">FromGear = 3,
-++ToGear = 4</label>
+ToGear = 4</label>
 		</transition>
 		<transition>
 			<source ref="id9"/>
 			<target ref="id7"/>
 			<label kind="synchronisation" x="281" y="310">ReqNewGear!</label>
 			<label kind="assignment" x="297" y="331">FromGear = 2,
-++ToGear = 3</label>
+ToGear = 3</label>
 		</transition>
 		<transition>
 			<source ref="id10"/>
@@ -162,14 +180,14 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 			<target ref="id11"/>
 			<label kind="synchronisation" x="153" y="136">ReqNewGear!</label>
 			<label kind="assignment" x="161" y="161">FromGear = 2,
-++ToGear = 1</label>
+ToGear = 1</label>
 		</transition>
 		<transition>
 			<source ref="id12"/>
 			<target ref="id10"/>
 			<label kind="synchronisation" x="281" y="-38">ReqNewGear!</label>
 			<label kind="assignment" x="281" y="-21">FromGear = 1,
-++ToGear = 2</label>
+ToGear = 2</label>
 		</transition>
 		<transition>
 			<source ref="id11"/>
@@ -186,14 +204,14 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 			<target ref="id17"/>
 			<label kind="synchronisation" x="-382" y="119">ReqNewGear!</label>
 			<label kind="assignment" x="-374" y="144">FromGear = 6,
-++ToGear = 0</label>
+ToGear = 0</label>
 		</transition>
 		<transition>
 			<source ref="id18"/>
 			<target ref="id16"/>
 			<label kind="synchronisation" x="-203" y="-25">ReqNewGear!</label>
 			<label kind="assignment" x="-203" y="-8">FromGear = 0,
-++ToGear = 6</label>
+ToGear = 6</label>
 		</transition>
 		<transition>
 			<source ref="id17"/>
@@ -205,7 +223,7 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 			<target ref="id13"/>
 			<label kind="synchronisation" x="76" y="-93">ReqNewGear!</label>
 			<label kind="assignment" x="76" y="-76">FromGear = 1,
-++ToGear = 0</label>
+ToGear = 0</label>
 		</transition>
 		<transition>
 			<source ref="id13"/>
@@ -222,13 +240,14 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 			<target ref="id14"/>
 			<label kind="synchronisation" x="-170" y="-170">ReqNewGear!</label>
 			<label kind="assignment" x="-161" y="-153">FromGear = 0,
-++ToGear = 1</label>
+ToGear = 1</label>
 		</transition>
 	</template>
 	<template>
 		<name>gearControl</name>
 		<location id="id19" x="323" y="85">
 			<name x="195" y="76">CReqSetGear2</name>
+			<committed/>
 		</location>
 		<location id="id20" x="93" y="340">
 			<name x="102" y="348">CheckGearSet2</name>
@@ -236,19 +255,22 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 		</location>
 		<location id="id21" x="93" y="255">
 			<name x="110" y="246">CClutchIsOpen</name>
+			<committed/>
 		</location>
 		<location id="id22" x="93" y="442">
 			<name x="102" y="450">CClutchClose</name>
+			<committed/>
 		</location>
 		<location id="id23" x="323" y="-263">
 			<name x="348" y="-272">CClutchOpen2</name>
+			<committed/>
 		</location>
 		<location id="id24" x="323" y="-25">
 			<name x="348" y="-51">CheckGearNeu2</name>
 			<label kind="invariant" x="313" y="-8">GCTimer &lt;= 250</label>
 		</location>
-		<location id="id25" x="25" y="-17">
-			<name x="0" y="-51">GNeuError</name>
+		<location id="id25" x="25" y="-25">
+			<name x="0" y="-59">GNeuError</name>
 		</location>
 		<location id="id26" x="-102" y="595">
 			<name x="-153" y="612">CheckClutchClosed2</name>
@@ -264,9 +286,9 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 		<location id="id29" x="-289" y="331">
 			<name x="-323" y="348">GSetError</name>
 		</location>
-		<location id="id30" x="-76" y="136">
-			<name x="-102" y="144">CheckClutch</name>
-			<label kind="invariant" x="-102" y="161">GCTimer &lt;= 200</label>
+		<location id="id30" x="-68" y="136">
+			<name x="-94" y="144">CheckClutch</name>
+			<label kind="invariant" x="-94" y="161">GCTimer &lt;= 200</label>
 		</location>
 		<location id="id31" x="-68" y="-127">
 			<name x="-51" y="-136">COpenError</name>
@@ -277,9 +299,11 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 		</location>
 		<location id="id33" x="-680" y="595">
 			<name x="-722" y="612">CGearChanged</name>
+			<committed/>
 		</location>
 		<location id="id34" x="-680" y="442">
 			<name x="-680" y="459">CReqTorqueC</name>
+			<committed/>
 		</location>
 		<location id="id35" x="-680" y="331">
 			<name x="-671" y="306">CheckGearSet1</name>
@@ -287,6 +311,7 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 		</location>
 		<location id="id36" x="-680" y="229">
 			<name x="-663" y="221">CReqSetGear</name>
+			<committed/>
 		</location>
 		<location id="id37" x="-680" y="127">
 			<name x="-663" y="102">CheckSyncSpeed</name>
@@ -294,6 +319,7 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 		</location>
 		<location id="id38" x="-680" y="17">
 			<name x="-654" y="8">CReqSyncSpeed</name>
+			<committed/>
 		</location>
 		<location id="id39" x="-680" y="-111">
 			<name x="-663" y="-127">checkGearNeu</name>
@@ -301,6 +327,7 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 		</location>
 		<location id="id40" x="-680" y="-221">
 			<name x="-654" y="-229">CReqNeuGear</name>
+			<committed/>
 		</location>
 		<location id="id41" x="-680" y="-348">
 			<name x="-671" y="-339">CheckTorque</name>
@@ -308,6 +335,7 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 		</location>
 		<location id="id42" x="-680" y="-450">
 			<name x="-654" y="-459">CInitiate</name>
+			<committed/>
 		</location>
 		<location id="id43" x="-680" y="-544">
 			<name x="-690" y="-578">Gear</name>
@@ -317,11 +345,13 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 			<source ref="id35"/>
 			<target ref="id29"/>
 			<label kind="guard" x="-569" y="314">GCTimer &gt; 300 &amp;&amp; GCTimer &lt;= 350</label>
+			<label kind="assignment" x="-518" y="331">GBErrIdle = false</label>
 		</transition>
 		<transition>
 			<source ref="id20"/>
 			<target ref="id29"/>
 			<label kind="guard" x="-246" y="306">GCTimer &gt; 300 &amp;&amp; GCTimer &lt;= 350</label>
+			<label kind="assignment" x="-187" y="348">GBErrIdle = false</label>
 		</transition>
 		<transition>
 			<source ref="id19"/>
@@ -346,7 +376,7 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 			<source ref="id30"/>
 			<target ref="id21"/>
 			<label kind="synchronisation" x="51" y="153">ClutchIsOpen?</label>
-			<nail x="93" y="127"/>
+			<nail x="93" y="136"/>
 		</transition>
 		<transition>
 			<source ref="id37"/>
@@ -359,21 +389,25 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 			<source ref="id39"/>
 			<target ref="id25"/>
 			<label kind="guard" x="-493" y="-85">GCTimer &gt; 200 &amp;&amp; GCTimer &lt;= 250</label>
+			<label kind="assignment" x="-416" y="-59">GBErrNeu = false</label>
 		</transition>
 		<transition>
 			<source ref="id30"/>
 			<target ref="id31"/>
 			<label kind="guard" x="-161" y="34">GCTimer &gt; 150 &amp;&amp; GCTimer &lt;= 200</label>
+			<label kind="assignment" x="-127" y="8">CErrOpen = false</label>
 		</transition>
 		<transition>
 			<source ref="id32"/>
 			<target ref="id31"/>
 			<label kind="guard" x="-161" y="-272">GCTimer &gt; 150 &amp;&amp; GCTimer &lt;= 200</label>
+			<label kind="assignment" x="-119" y="-238">CErrOpen = false</label>
 		</transition>
 		<transition>
 			<source ref="id24"/>
 			<target ref="id25"/>
 			<label kind="guard" x="51" y="-17">GCTimer &gt; 200 &amp;&amp; GCTimer &lt;= 250</label>
+			<label kind="assignment" x="102" y="-42">GBErrNeu = false</label>
 		</transition>
 		<transition>
 			<source ref="id22"/>
@@ -390,12 +424,14 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 			<source ref="id28"/>
 			<target ref="id27"/>
 			<label kind="guard" x="-569" y="484">GCTimer &gt; 150 &amp;&amp; GCTimer &lt;= 200</label>
+			<label kind="assignment" x="-501" y="501">CErrClose = false</label>
 			<nail x="-450" y="518"/>
 		</transition>
 		<transition>
 			<source ref="id26"/>
 			<target ref="id27"/>
 			<label kind="guard" x="-212" y="535">GCTimer &gt; 150 &amp;&amp; GCTimer &lt;= 200</label>
+			<label kind="assignment" x="-170" y="518">CErrClose = false</label>
 			<nail x="-102" y="510"/>
 		</transition>
 		<transition>
@@ -524,11 +560,11 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 		<location id="id45" x="221" y="-119">
 			<name x="204" y="-153">Open</name>
 		</location>
-		<location id="id46" x="93" y="-42">
-			<name x="68" y="-76">ErrorClose</name>
+		<location id="id46" x="493" y="68">
+			<name x="468" y="34">ErrorClose</name>
 		</location>
-		<location id="id47" x="-42" y="-42">
-			<name x="-76" y="-25">ErrorOpen</name>
+		<location id="id47" x="-433" y="-119">
+			<name x="-467" y="-102">ErrorOpen</name>
 		</location>
 		<location id="id48" x="-170" y="-119">
 			<name x="-195" y="-161">Opening</name>
@@ -541,14 +577,30 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 		<transition>
 			<source ref="id44"/>
 			<target ref="id46"/>
-			<label kind="guard" x="51" y="25">CTimer == 150</label>
-			<label kind="assignment" x="102" y="42">ErrStat = 1</label>
+			<label kind="guard" x="238" y="212">CTimer == 150 &amp;&amp; !CErrClose</label>
+			<label kind="assignment" x="212" y="238">ErrStat = 1, CErrCloseClock = 0, CErrClose = true</label>
+			<nail x="221" y="204"/>
+			<nail x="493" y="204"/>
 		</transition>
 		<transition>
 			<source ref="id48"/>
 			<target ref="id47"/>
-			<label kind="guard" x="-136" y="-119">CTimer == 150</label>
-			<label kind="assignment" x="-110" y="-102">ErrStat = 2</label>
+			<label kind="guard" x="-408" y="-314">CTimer == 150 &amp;&amp; !CErrOpen</label>
+			<label kind="assignment" x="-433" y="-289">ErrStat = 2, CErrOpenClock = 0, CErrOpen = true</label>
+			<nail x="-170" y="-263"/>
+			<nail x="-433" y="-263"/>
+		</transition>
+		<transition>
+			<source ref="id44"/>
+			<target ref="id46"/>
+			<label kind="guard" x="246" y="34">CTimer == 150 &amp;&amp; CErrClose</label>
+			<label kind="assignment" x="297" y="51">ErrStat = 1</label>
+		</transition>
+		<transition>
+			<source ref="id48"/>
+			<target ref="id47"/>
+			<label kind="guard" x="-399" y="-119">CTimer == 150 &amp;&amp; CErrOpen</label>
+			<label kind="assignment" x="-322" y="-102">ErrStat = 2</label>
 		</transition>
 		<transition>
 			<source ref="id44"/>
@@ -579,7 +631,7 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 		<name>engine</name>
 		<location id="id50" x="255" y="-187">
 			<name x="230" y="-246">DecTorque</name>
-			<label kind="invariant" x="272" y="-195">ETimer &lt;= 400</label>
+			<label kind="invariant" x="221" y="-221">ETimer &lt;= 400</label>
 		</location>
 		<location id="id51" x="-229" y="-187">
 			<name x="-239" y="-221">Torque</name>
@@ -597,6 +649,7 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 		</location>
 		<location id="id55" x="59" y="-93">
 			<name x="8" y="-127">CClutchOpen</name>
+			<committed/>
 		</location>
 		<location id="id56" x="255" y="127">
 			<name x="238" y="144">Zero</name>
@@ -662,7 +715,7 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 			<target ref="id57"/>
 			<label kind="synchronisation" x="77" y="29">ReqSpeed?</label>
 			<label kind="assignment" x="77" y="46">ETimer = 0,
-++UseCase = 0</label>
+UseCase = 0</label>
 		</transition>
 		<transition>
 			<source ref="id56"/>
@@ -677,7 +730,7 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 		<transition>
 			<source ref="id50"/>
 			<target ref="id55"/>
-			<label kind="guard" x="110" y="-161">ETimer &gt; 400</label>
+			<label kind="guard" x="110" y="-161">ETimer == 400</label>
 			<label kind="assignment" x="119" y="-144">UseCase = 1</label>
 		</transition>
 		<transition>
@@ -691,27 +744,27 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 			<target ref="id50"/>
 			<label kind="synchronisation" x="-119" y="-238">ReqZeroTorque?</label>
 			<label kind="assignment" x="-119" y="-221">ETimer = 0,
-+ UseCase = 0</label>
+UseCase = 0</label>
 		</transition>
 	</template>
 	<template>
 		<name>gearBox</name>
-		<location id="id59" x="42" y="-76">
-			<name x="17" y="-59">ErrorNeu</name>
+		<location id="id59" x="416" y="-161">
+			<name x="391" y="-144">ErrorNeu</name>
 		</location>
 		<location id="id60" x="153" y="-161">
-			<name x="136" y="-195">Opening</name>
-			<label kind="invariant" x="195" y="-178">GBTimer &lt;= 200</label>
+			<name x="136" y="-212">Opening</name>
+			<label kind="invariant" x="119" y="-195">GBTimer &lt;= 200</label>
 		</location>
 		<location id="id61" x="153" y="17">
 			<name x="136" y="34">Idle</name>
 		</location>
-		<location id="id62" x="-76" y="-76">
-			<name x="-102" y="-110">ErrorIdle</name>
+		<location id="id62" x="-476" y="17">
+			<name x="-502" y="-17">ErrorIdle</name>
 		</location>
 		<location id="id63" x="-187" y="17">
 			<name x="-212" y="34">Closing</name>
-			<label kind="invariant" x="-238" y="93">GBTimer &lt;= 300</label>
+			<label kind="invariant" x="-246" y="59">GBTimer &lt;= 300</label>
 		</location>
 		<location id="id64" x="-187" y="-161">
 			<name x="-212" y="-195">Neutral</name>
@@ -720,14 +773,30 @@ chan ReqSpeed, ReqTorque, ReqZeroTorque, TorqueZero, SpeedSet;
 		<transition>
 			<source ref="id60"/>
 			<target ref="id59"/>
-			<label kind="guard" x="0" y="-153">GBTimer &gt; 200</label>
-			<label kind="assignment" x="8" y="-136">ErrStat = 4</label>
+			<label kind="guard" x="178" y="-323">GBTimer &gt; 200 &amp;&amp; !GBErrNeu</label>
+			<label kind="assignment" x="153" y="-297">ErrStat = 4, GBErrNeuClock = 0, GBErrNeu = true</label>
+			<nail x="153" y="-280"/>
+			<nail x="416" y="-280"/>
 		</transition>
 		<transition>
 			<source ref="id63"/>
 			<target ref="id62"/>
-			<label kind="guard" x="-153" y="-17">GBTimer == 300</label>
-			<label kind="assignment" x="-127" y="-34">ErrStat = 3</label>
+			<label kind="guard" x="-416" y="221">GBTimer == 300 &amp;&amp; !GBErrIdle</label>
+			<label kind="assignment" x="-484" y="195">ErrStat = 3, GBErrIdleClock = 0, GBErrIdle = true</label>
+			<nail x="-187" y="195"/>
+			<nail x="-476" y="195"/>
+		</transition>
+		<transition>
+			<source ref="id60"/>
+			<target ref="id59"/>
+			<label kind="guard" x="187" y="-153">GBTimer &gt; 200 &amp;&amp; GBErrNeu</label>
+			<label kind="assignment" x="220" y="-136">ErrStat = 4</label>
+		</transition>
+		<transition>
+			<source ref="id63"/>
+			<target ref="id62"/>
+			<label kind="guard" x="-425" y="-17">GBTimer == 300 &amp;&amp; GBErrIdle</label>
+			<label kind="assignment" x="-348" y="0">ErrStat = 3</label>
 		</transition>
 		<transition>
 			<source ref="id63"/>
