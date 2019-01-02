@@ -878,6 +878,42 @@ system GC, I, C, E, GB;
 			</comment>
 		</query>
 		<query>
+			<formula>inf{GBErrNeu}:GBErrNeuClock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>sup{GBErrNeu}:GBErrNeuClock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] GBErrNeu imply GBErrNeuClock&lt;=200
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>inf{GBErrIdle}:GBErrIdleClock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>sup{GBErrIdle}:GBErrIdleClock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] GBErrIdle imply GBErrIdleClock&lt;=350
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
 			<formula>inf{CErrOpen}:CErrOpenClock
 			</formula>
 			<comment>
