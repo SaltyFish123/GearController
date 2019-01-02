@@ -35,6 +35,9 @@ clock CErrOpenClock;
 bool CErrClose = false;
 clock CErrCloseClock;
 
+//gearControl Initial
+bool GCInitial = false;
+
 
 </declaration>
 	<template>
@@ -334,13 +337,22 @@ ToGear = 1</label>
 			<label kind="invariant" x="-680" y="-323">GCTimer &lt;= 255</label>
 		</location>
 		<location id="id42" x="-680" y="-450">
-			<name x="-654" y="-459">CInitiate</name>
+			<name x="-748" y="-459">CInitiate</name>
 			<committed/>
 		</location>
 		<location id="id43" x="-680" y="-544">
 			<name x="-690" y="-578">Gear</name>
 		</location>
 		<init ref="id43"/>
+		<transition>
+			<source ref="id43"/>
+			<target ref="id42"/>
+			<label kind="guard" x="-518" y="-518">!GCInitial</label>
+			<label kind="synchronisation" x="-535" y="-501">ReqNewGear?</label>
+			<label kind="assignment" x="-552" y="-484">SysTimer = 0, GCInitial = true</label>
+			<nail x="-484" y="-544"/>
+			<nail x="-485" y="-450"/>
+		</transition>
 		<transition>
 			<source ref="id35"/>
 			<target ref="id29"/>
@@ -438,6 +450,7 @@ ToGear = 1</label>
 			<source ref="id26"/>
 			<target ref="id33"/>
 			<label kind="synchronisation" x="-493" y="578">ClutchIsClosed?</label>
+			<label kind="assignment" x="-493" y="603">GCInitial = false</label>
 		</transition>
 		<transition>
 			<source ref="id19"/>
@@ -483,6 +496,7 @@ ToGear = 1</label>
 			<source ref="id38"/>
 			<target ref="id33"/>
 			<label kind="guard" x="-841" y="323">ToGear &lt;= 0</label>
+			<label kind="assignment" x="-841" y="348">GCInitial = false</label>
 			<nail x="-807" y="340"/>
 		</transition>
 		<transition>
@@ -495,6 +509,7 @@ ToGear = 1</label>
 			<source ref="id34"/>
 			<target ref="id33"/>
 			<label kind="synchronisation" x="-705" y="501">ReqTorque!</label>
+			<label kind="assignment" x="-705" y="518">GCInitial = false</label>
 		</transition>
 		<transition>
 			<source ref="id35"/>
@@ -547,6 +562,7 @@ ToGear = 1</label>
 		<transition>
 			<source ref="id43"/>
 			<target ref="id42"/>
+			<label kind="guard" x="-680" y="-531">GCInitial</label>
 			<label kind="synchronisation" x="-680" y="-514">ReqNewGear?</label>
 			<label kind="assignment" x="-680" y="-497">SysTimer = 0</label>
 		</transition>
