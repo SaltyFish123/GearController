@@ -835,5 +835,215 @@ GB = gearBox();
 system GC, I, C, E, GB;
     </system>
 	<queries>
+		<query>
+			<formula>inf{((ErrStat==0 &amp;&amp; UseCase==0) and GC.CGearChanged)}:SysTimer
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>sup{((ErrStat==0 &amp;&amp; UseCase==0) and GC.CGearChanged)}:SysTimer
+			</formula>
+			<comment>GC.CInitiate --&gt; (((ErrStat==0 &amp;&amp; UseCase==0) imply GC.CGearChanged) and SysTimer &lt;=1000)
+			</comment>
+		</query>
+		<query>
+			<formula>GC.CInitiate --&gt; (((ErrStat==0 &amp;&amp; UseCase==0) imply GC.CGearChanged) and SysTimer &lt;=899)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>GC.CInitiate --&gt; (((ErrStat==0 &amp;&amp; UseCase==0) imply GC.CGearChanged) and SysTimer &lt;=1000)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>inf{(ErrStat==0 and GC.CGearChanged)}:SysTimer
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>sup{(ErrStat==0 and GC.CGearChanged)}:SysTimer
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>GC.CInitiate --&gt; ((ErrStat==0 imply GC.CGearChanged) and SysTimer &lt;=1500)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>inf{CErrOpen}:CErrOpenClock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>sup{CErrOpen}:CErrOpenClock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] CErrOpen imply CErrOpenClock&lt;=200
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>inf{CErrClose}:CErrCloseClock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>sup{CErrClose}:CErrCloseClock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] CErrClose imply CErrCloseClock&lt;=200
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>//Pro 3
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] GC.CCloseError imply C.ErrorClose
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] GC.COpenError imply C.ErrorOpen
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] GC.GSetError imply GB.ErrorIdle
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] GC.GNeuError imply GB.ErrorNeu
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] E.ErrorSpeed imply ErrStat!=0
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] E.Torque imply C.Closed
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; I.GearN
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; I.Gear1
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; I.Gear2
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; I.Gear3
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; I.Gear4
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; I.Gear5
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; I.GearR
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (GC.Gear and I.Gear1) imply E.Torque
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (GC.Gear and I.Gear2) imply E.Torque
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (GC.Gear and I.Gear3) imply E.Torque
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (GC.Gear and I.Gear4) imply E.Torque
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (GC.Gear and I.Gear5) imply E.Torque
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (GC.Gear and I.GearR) imply E.Torque
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] not deadlock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] ErrStat!=0 or not deadlock
+			</formula>
+			<comment>
+			</comment>
+		</query>
 	</queries>
 </nta>
