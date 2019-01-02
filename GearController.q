@@ -1,4 +1,134 @@
-//This file was generated from (Commercial) UPPAAL 4.0.14 (rev. 5615), May 2014
+//This file was generated from (Academic) UPPAAL 4.1.13 (rev. 5160), November 2012
+
+/*
+
+*/
+inf{((ErrStat==0 && UseCase==0) and GC.CGearChanged)}:SysTimer
+
+/*
+
+*/
+sup{((ErrStat==0 && UseCase==0) and GC.CGearChanged)}:SysTimer
+
+/*
+
+*/
+GC.CInitiate --> (((ErrStat==0 && UseCase==0) imply GC.CGearChanged) and SysTimer <=899)
+
+/*
+
+*/
+GC.CInitiate --> (((ErrStat==0 && UseCase==0) imply GC.CGearChanged) and SysTimer <=1000)
+
+/*
+
+*/
+//Pro 2
+
+/*
+
+*/
+//NO_QUERY
+
+/*
+
+*/
+inf{(ErrStat==0 and GC.CGearChanged)}:SysTimer
+
+/*
+
+*/
+sup{(ErrStat==0 and GC.CGearChanged)}:SysTimer
+
+/*
+
+*/
+GC.CInitiate --> ((ErrStat==0 imply GC.CGearChanged) and SysTimer <=1500)
+
+/*
+
+*/
+//Pro 1
+
+/*
+
+*/
+//NO_QUERY
+
+/*
+
+*/
+inf{GBErrNeu}:GBErrNeuClock
+
+/*
+
+*/
+sup{GBErrNeu}:GBErrNeuClock
+
+/*
+
+*/
+A[] GBErrIdle imply GBErrIdleClock<=350
+
+/*
+
+*/
+//Pro5
+
+/*
+
+*/
+//NO_QUERY
+
+/*
+
+*/
+inf{CErrOpen}:CErrOpenClock
+
+/*
+
+*/
+sup{CErrOpen}:CErrOpenClock
+
+/*
+
+*/
+A[] CErrOpen imply CErrOpenClock<=200
+
+/*
+
+*/
+//Pro 4
+
+/*
+
+*/
+//NO_QUERY
+
+/*
+
+*/
+inf{CErrClose}:CErrCloseClock
+
+/*
+
+*/
+sup{CErrClose}:CErrCloseClock
+
+/*
+
+*/
+A[] CErrClose imply CErrCloseClock<=200
+
+/*
+
+*/
+//Pro 3
+
+/*
+
+*/
+//NO_QUERY
 
 /*
 
