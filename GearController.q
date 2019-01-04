@@ -13,12 +13,12 @@ sup{((ErrStat==0 && UseCase==0) and GC.CGearChanged)}:SysTimer
 /*
 
 */
-GC.CInitiate --> (((ErrStat==0 && UseCase==0) imply GC.CGearChanged) and SysTimer <=899)
+GC.CInitiate --> (((ErrStat==0 && UseCase==0) imply GC.CGearChanged) and SysTimer <=1000)
 
 /*
 
 */
-GC.CInitiate --> (((ErrStat==0 && UseCase==0) imply GC.CGearChanged) and SysTimer <=1000)
+A[] (ErrStat == 0 && UseCase == 0 && GCInitial) imply SysTimer <= 1000
 
 /*
 
@@ -48,6 +48,11 @@ GC.CInitiate --> ((ErrStat==0 imply GC.CGearChanged) and SysTimer <=1500)
 /*
 
 */
+A[] (ErrStat == 0 && GCInitial) imply SysTimer <= 1500
+
+/*
+
+*/
 //Pro 1
 
 /*
@@ -64,6 +69,31 @@ inf{GBErrNeu}:GBErrNeuClock
 
 */
 sup{GBErrNeu}:GBErrNeuClock
+
+/*
+
+*/
+A[] GBErrNeu imply GBErrNeuClock<=200
+
+/*
+
+*/
+//Pro 6
+
+/*
+
+*/
+//NO_QUERY
+
+/*
+
+*/
+inf{GBErrIdle}:GBErrIdleClock
+
+/*
+
+*/
+sup{GBErrIdle}:GBErrIdleClock
 
 /*
 
@@ -153,6 +183,11 @@ A[] GC.GNeuError imply GB.ErrorNeu
 /*
 
 */
+//Pro 7 ~ 10
+
+/*
+
+*/
 //NO_QUERY
 
 /*
@@ -164,6 +199,11 @@ A[] E.ErrorSpeed imply ErrStat!=0
 
 */
 A[] E.Torque imply C.Closed
+
+/*
+
+*/
+//Pro 11 ~ 12
 
 /*
 
@@ -208,6 +248,11 @@ E<> I.GearR
 /*
 
 */
+//Pro 13
+
+/*
+
+*/
 //NO_QUERY
 
 /*
@@ -243,6 +288,36 @@ A[] (GC.Gear and I.GearR) imply E.Torque
 /*
 
 */
+//Pro 14
+
+/*
+
+*/
+//NO_QUERY
+
+/*
+
+*/
+A[] (ErrStat == 0 && UseCase == 0 && GCInitial) imply SysTimer <= 900
+
+/*
+
+*/
+//Pro 15
+
+/*
+
+*/
+A[] (ErrStat == 0 && UseCase == 0 && GCInitial) imply SysTimer <= 899
+
+/*
+
+*/
+//Pro16
+
+/*
+
+*/
 //NO_QUERY
 
 /*
@@ -253,4 +328,10 @@ A[] not deadlock
 /*
 
 */
-A[] ErrStat==0 or not deadlock
+A[] deadlock imply ErrStat!=0\
+
+
+/*
+
+*/
+A[] ErrStat !=0 or not deadlock
